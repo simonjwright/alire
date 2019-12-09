@@ -176,10 +176,12 @@ package body Alire.Origins.Deployers.Source_Archive is
                --  Option required on Windows to force e.g. C: to mean
                --  a local file location rather than the net host C.
                --  Not available as standard on MacOS.
-               Force_Local_Option : constant String :=
+               Force_Local_Option : constant String_Vector :=
                  (case GNATCOLL.OS.Constants.OS is
-                     when GNATCOLL.OS.Windows => "--force-local",
-                     when others => "");
+                     when GNATCOLL.OS.Windows =>
+                        Empty_Vector & "--force-local",
+                     when others =>
+                        Empty_Vector);
             begin
                Subprocess.Checked_Spawn
                  ("tar", Empty_Vector &
