@@ -1,16 +1,16 @@
-name: CI macOS
+name: CI Windows on push
 
 on:
-  pull_request:
+  push:
     paths-ignore:
       - 'doc/**'
 
 jobs:
 
   build:
-    name: CI on macOS
+    name: CI on Windows, on push
 
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
     - name: Check out repository
@@ -29,6 +29,9 @@ jobs:
       with:
         python-version: '2.x'
 
+    - name: Install vcpython27 (required for some e3-testsuite deps)
+      run: choco install vcpython27
+
     - name: Run test script
       run: scripts/ci-github.sh
       shell: bash
@@ -40,5 +43,5 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@master
       with:
-        name: testsuite-log-macos.zip
+        name: testsuite-log-windows.zip
         path: testsuite/out

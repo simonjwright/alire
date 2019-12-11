@@ -1,14 +1,14 @@
-name: CI macOS
+name: CI macOS on push
 
 on:
-  pull_request:
+  push:
     paths-ignore:
       - 'doc/**'
 
 jobs:
 
   build:
-    name: CI on macOS
+    name: CI on macOS, on push
 
     runs-on: macos-latest
 
