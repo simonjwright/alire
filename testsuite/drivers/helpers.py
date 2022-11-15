@@ -178,7 +178,8 @@ def init_git_repo(path):
     """
     start_cwd = os.getcwd()
     os.chdir(path)
-    assert run(["git", "init", "-b", "master", "."]).returncode == 0
+    assert run(["git", "init", "."]).returncode == 0
+    assert run(["git", "checkout", "-b", "master"]).returncode == 0
     assert run(["git", "config", "user.email", "alr@testing.com"]) \
         .returncode == 0
     assert run(["git", "config", "user.name", "Alire Testsuite"]) \
