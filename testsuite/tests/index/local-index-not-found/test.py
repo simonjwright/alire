@@ -10,12 +10,6 @@ from e3.fs import rm
 from drivers.alr import prepare_indexes, run_alr
 from drivers.asserts import assert_match
 
-def comparator(param):
-    """If the test value (in d) is 'no-such-directory', the value tested for
-    is './no-such-directory'; if not, it's left as it is."""
-    if param == 'no-such-directory': return './no-such-directory'
-    return param
-
 for d in ('no-such-directory',
           'file://no-such-directory', ):
     rm('alr-config', recursive=True)
@@ -26,9 +20,9 @@ for d in ('no-such-directory',
     path_excerpt = os.path.join('alr-config', 'indexes', 'bad_index',
                                 'index.toml')
     assert_match('ERROR: Cannot load metadata from .*{}:'
-                 ' Not a readable directory: {}'
+                 ' Not a readable directory: ./{}'
                  '\n'
-                 .format(re.escape(path_excerpt), comparator(d)),
+                 .format(re.escape(path_excerpt), d),
                  p.out)
 
 print('SUCCESS')
