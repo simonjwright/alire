@@ -3,6 +3,7 @@ Test that Alire properly reports an invalid index URL.
 """
 
 import os
+import os.path
 import re
 
 from e3.fs import rm
@@ -20,9 +21,9 @@ for d in ('no-such-directory',
     path_excerpt = os.path.join('alr-config', 'indexes', 'bad_index',
                                 'index.toml')
     assert_match('ERROR: Cannot load metadata from .*{}:'
-                 ' Not a readable directory: ./{}'
+                 ' Not a readable directory: .{}{}'
                  '\n'
-                 .format(re.escape(path_excerpt), d),
+                 .format(re.escape(path_excerpt), os.path.sep, d),
                  p.out)
 
 print('SUCCESS')
