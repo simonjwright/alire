@@ -128,7 +128,7 @@ jobs:
         with:
           fileName: '*-x86_64-macos.zip'
           latest: true
-          preRelease: false
+          preRelease: true
           out-file-path: 'x86_64'
           extract: true
         
@@ -136,7 +136,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           latest: true
-          preRelease: false
+          preRelease: true
           fileName: '*-aarch64-macos.zip'
           out-file-path: 'aarch64'
           extract: true
@@ -147,7 +147,7 @@ jobs:
           lipo x86_64/bin/alr aarch64/bin/alr -create -output bin/alr
           chmod +x bin/alr
           cp aarch64/LICENSE.txt .
-          zip alr-bin--macos.zip bin/alr LICENSE.txt
+          zip alr-bin-macos.zip bin/alr LICENSE.txt
 
       # Release steps
 
